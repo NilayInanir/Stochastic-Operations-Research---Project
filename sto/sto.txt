@@ -1,0 +1,244 @@
+# the libraries to be used are called.
+import random
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+def state_to_graph(_list):
+    counter_of_x = 1
+    counter_of_y = 1
+    list_of_x = []
+    list_of_y = []
+    for index in _list:
+        if index in [3,4]:
+            list_of_x.append(counter_of_x)
+            list_of_y.append(counter_of_y/counter_of_x)
+            counter_of_x += 1
+        counter_of_y += 1
+    return (list_of_x,list_of_y)
+
+
+def plot(x,y,turnNumber):
+    dataframe = pd.DataFrame({"x":x,"y":y})
+    sns.lineplot(x=x,y=y,data=dataframe)
+    plt.title("Graph First" + str(turnNumber))
+    plt.show(block=True)
+"""
+    sns.scatterplot(x=x,y=y,data=dataframe)
+    plt.title("Graph Second" + str(turnNumber))
+    plt.show(block=True)
+"""
+
+# PART1 STEP1
+# oluşturulacak 5,5 lik matrixin içine atancak değerler random 0,1 aralığında atanır.
+# round komutu üretilecek , random sayı virgülden sonra kaç basamaklı olacaksa onu sağlar
+p00 = round(random.random(), 2) # matrixin ilk satır ve sütünundaki değer üretilip atanır
+p01 = round(random.random(), 2) # matrixin ilk satır ve 2.sütünundaki değer üretilip atanır
+p02 = round(random.random(), 2) # matrixin ilk satır ve 3.sütünundaki değer üretilip atanır
+p03 = round(random.random(), 2) # matrixin ilk satır ve 4.sütünundaki değer üretilip atanır
+p04 = round(random.random(), 2) # matrixin ilk satır ve 5.sütünundaki değer üretilip atanır
+
+# en başta ilk satır için üretilen random sayılar gerekli koşulları sağlamazsa tekrar üretilmesi için bir döngü oluşturduk.
+while True: # gerekli koşullar sağlanana kadar döngü devam eder.
+    if ((p00 + p01 + p02 + p03 + p04) != 1) or ((p00 and p01 and p02 and p03 and p04) == 0) :
+    #üretilen random sayıların iki kısıtı vardır.İlki saırdaki sayıların toplamının 1 e eşit olması , ikincisi ise üretilen hiçbir sayının 0 a eşit olmaması.
+        p00 = round(random.random(), 2)
+        p01 = round(random.random(), 2)
+        p02 = round(random.random(), 2)
+        p03 = round(random.random(), 2)
+        p04 = round(random.random(), 2)
+        # üretilen random sayılar koşulu tekrar sağlanmazsa döngü koşul sağlanana kadar devam eder.
+    else:
+    # yukardaki koşullar sağlanmazsa ilk üretilen random sayılar gerekli koşulları sağladığı için kulllanılır ve döngü biter.
+        break
+
+p10 = round(random.random(), 2)
+p11 = round(random.random(), 2)
+p12 = round(random.random(), 2)
+p13 = round(random.random(), 2)
+p14 = round(random.random(), 2)
+
+# en başta ilk satır için üretilen random sayılar gerekli koşulları sağlamazsa tekrar üretilmesi için bir döngü oluşturduk
+while True: # gerekli koşullar sağlanana kadar döngü devam eder.
+    if ((p10 + p11 + p12 + p13 + p14) != 1) or ((p10 and p11 and p12 and p13 and p14) == 0) :
+
+        p10 = round(random.random(), 2)
+        p11 = round(random.random(), 2)
+        p12 = round(random.random(), 2)
+        p13 = round(random.random(), 2)
+        p14 = round(random.random(), 2)
+        # üretilen random sayılar koşulu tekrar sağlanmazsa döngü koşul sağlanana kadar devam eder
+    else:
+    # yukardaki koşullar sağlanmazsa ilk üretilen random sayılar gerekli koşulları sağladığı için kulllanılır ve döngü biter.
+        break
+
+p20 = round(random.random(), 2)
+p21 = round(random.random(), 2)
+p22 = round(random.random(), 2)
+p23 = round(random.random(), 2)
+p24 = round(random.random(), 2)
+
+# en başta ilk satır için üretilen random sayılar gerekli koşulları sağlamazsa tekrar üretilmesi için bir döngü oluşturduk
+while True:# gerekli koşullar sağlanana kadar döngü devam eder.
+    if ((p20 + p21 + p22 + p23 + p24) != 1) or ((p20 and p21 and p22 and p23 and p24) == 0) :
+
+        p20 = round(random.random(), 2)
+        p21 = round(random.random(), 2)
+        p22 = round(random.random(), 2)
+        p23 = round(random.random(), 2)
+        p24 = round(random.random(), 2)
+        # üretilen random sayılar koşulu tekrar sağlanmazsa döngü koşul sağlanana kadar devam eder
+    else:
+    # yukardaki koşullar sağlanmazsa ilk üretilen random sayılar gerekli koşulları sağladığı için kulllanılır ve döngü biter.
+        break
+
+# 3. ve 4. satırlarımız absorption state olduğu için p33 ve p44 değerimizin 1 kalanların ise 0 olması gerekir.(identitiy matrix)
+p30 = 0.00
+p31 = 0.00
+p32 = 0.00
+p33 = 1.00
+p34 = 0.00
+
+p40 = 0.00
+p41 = 0.00
+p42 = 0.00
+p43 = 0.00
+p44 = 1.00
+a = [[p00,p01,p02,p03,p04], # üretilen random değerlerimizi matrix formatinde a değişkeninin içine atadık.
+     [p10,p11,p12,p13,p14],
+     [p20,p21,p22,p23,p24],
+     [p30,p31,p32,p33,p34],
+     [p40,p41,p42,p43,p44]]
+
+print("our matrix", a) # a matrixi yazdırılır.
+
+# step 2
+# cdf hesaplama
+print("----------------V LER----------------------")
+cum_row_0 = [] #1.satırın cdf değerlerinin içine atanması için boş bir liste atanır.
+sum = 0 # başlangıç değerimizi üzerinde işlem yapabilmek için 0 olarak atadık (etkisiz eleman 0 dır)
+#  döngü 1. satırın cdf değerlerini hesaplatıp atadığımız cum row 1 listesine ekler.
+for j in a[0]:  # 0. satır için
+    sum += j
+    cum_row_0.append(sum)
+
+print("cum for row 0: ", cum_row_0)
+#  döngü 2. satırın cdf değerlerini hesaplatıp atadığımız cum row 2 listesine ekler
+cum_row_1 = [] #2.satırın cdf değerlerinin içine atanması için boş bir liste atanır.
+sum = 0 #tekrardan başlangıc değerini atamamız gerekiyor çünkü bir önceki döngüde sum değişkeni 1 olarak çıkar.
+for j in a[1]:
+    sum += j
+    cum_row_1.append(sum)
+print("cum for row 1: ", cum_row_1)
+#  döngü 3. satırın cdf değerlerini hesaplatıp atadığımız cum row 3 listesine ekler
+cum_row_2 = [] #3.satırın cdf değerlerinin içine atanması için boş bir liste atanır.
+sum = 0 #tekrardan başlangıc değerini atamamız gerekiyor çünkü bir önceki döngüde sum değişkeni 1 olarak çıkar.
+for j in a[2]:
+    sum += j
+    cum_row_2.append(sum) #append komutu listeye sondan atama yapar.
+print("cum for row 2: ", cum_row_2)
+
+# listedeki çıktılar cum e göre rowların bir sonrakinde nereye geçeceği
+cum_row = [cum_row_0, cum_row_1, cum_row_2]
+from copy import copy
+
+visited_number = []
+
+for outer_i in range(3):
+    state_visited = []
+    generate_rn = []
+    for i in range(1500):                    #v0 için yani 0. satırdan başladığını çözdürüyosun
+        flag = True
+        index = copy(outer_i)
+        while flag:
+            rn_1 = round(random.random(), 2)     #rn satırlar için new rassal number HER YENİ STEPE GEÇİLDİĞİNDE DEĞİŞMELİLER
+            generate_rn.append(rn_1)
+            if rn_1 <= cum_row[index][0]:
+                state_visited.append(0)
+            elif rn_1 <= cum_row[index][1]:
+                state_visited.append(1)
+            elif rn_1 <= cum_row[index][2]:
+                state_visited.append(2)
+            elif rn_1 <= cum_row[index][3]:
+                state_visited.append(3)
+                flag = False
+            else:
+                state_visited.append(4)
+                flag = False
+            index = state_visited[-1]
+    print("random number for row 1"+str(outer_i)+": ", generate_rn)
+    print("state visited for row 1"+str(outer_i)+": ", state_visited)
+    (list_of_x, list_of_y) = state_to_graph(state_visited)
+    plot(list_of_x,list_of_y,outer_i+1)
+    print("output for listx",list_of_x)
+    print("output for listy",list_of_y)
+    lenght_absorption_row = len(state_visited)
+    print(lenght_absorption_row)
+    meantimeuntilabsorption = lenght_absorption_row / 1500
+    print("simulation v"+str(outer_i)+" :", meantimeuntilabsorption)
+
+print("-----------U LAR---------------")
+
+# u0
+
+for title_index in range(3):
+    u = []
+    generate_rn_u = []
+    run_time = 1000
+    for i in range(run_time):                    #v0 için yani 0. satırdan başladığını çözdürüyosun
+        index = 0
+        flag = True
+        while flag:
+            rnu0 = round(random.random(), 2)     #rn satırlar için new rassal number HER YENİ STEPE GEÇİLDİĞİNDE DEĞİŞMELİLER
+            generate_rn_u.append(rnu0)
+            if rnu0 <= cum_row[index][0]:
+                u.append(0)
+            elif rnu0 <= cum_row[index][1]:
+                u.append(1)
+            elif rnu0 <= cum_row[index][2]:
+                u.append(2)
+            elif rnu0 <= cum_row[index][3]:
+                u.append(3)
+                flag = False
+            else:
+                u.append(4)
+                flag = False
+            index = u[-1]
+    print(generate_rn_u)
+    print(u)
+    absorbinu03 = u.count(3)
+    absorbtion_probability_u03 = absorbinu03 / run_time
+    print("absorption probability u03"+str(index) , absorbtion_probability_u03)
+    absorbinu04 = u.count(4)
+    absorbtion_probability_u04 = absorbinu04 / run_time
+    print("absorption probability u04"+str(index) , absorbtion_probability_u04)
+    plot([absorbtion_probability_u03,absorbtion_probability_u04],[1000,1000],title_index)
+
+theoritical2 = []
+theoritical2_0 = [a[0][0], a[0][1], a[0][2]]
+theoritical2_1 = [a[1][0], a[1][1], a[1][2]]
+theoritical2_2 = [a[2][0], a[2][1], a[2][2]]
+theoritical2.append(theoritical2_0)
+theoritical2.append(theoritical2_1)
+theoritical2.append(theoritical2_2)
+
+print("-----------THEORİTİCAL---------------")
+
+print(theoritical2)
+I = np.eye(3)
+N = np.linalg.inv(I-theoritical2)
+
+print(N)
+sumtheo = []
+x = N[0][0] + N[0][1] +N[0][2]
+y = N[1][0] + N[1][1] + N[1][2]
+z = N[2][0] + N[2][1] + N[2][2]
+n_0 = sumtheo.append(x)
+n_1 = sumtheo.append(y)
+n_2 = sumtheo.append(z)
+print("theoritical solution for v", sumtheo)
+
+R = np.dot(N, a[:3])
+A = R[:, 3:]
+print("U lar", A)
